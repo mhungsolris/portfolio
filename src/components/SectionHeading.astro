@@ -1,0 +1,23 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  summary?: string;
+}
+
+const { number, title, summary } = Astro.props;
+---
+
+<header class="mb-12 border-t border-border pt-8 md:mb-16 md:grid md:grid-cols-[9rem_1fr] md:gap-10 md:pt-10">
+  <div class="mb-5 flex items-center gap-3 md:mb-0 md:block">
+    <span class="font-mono text-sm text-muted md:block">/{number}</span>
+    <span class="hidden h-px flex-1 bg-border md:mt-5 md:block md:w-20"></span>
+  </div>
+  <div>
+    <p class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-muted">Section {number}</p>
+    <h2 class="max-w-4xl text-balance font-serif text-5xl leading-[0.98] tracking-tight text-foreground md:text-7xl">
+      {title}
+    </h2>
+    {summary && <p class="mt-7 max-w-3xl font-sans text-lg leading-relaxed text-foreground/70 md:text-xl">{summary}</p>}
+  </div>
+</header>
