@@ -7,7 +7,7 @@ import ProjectCard from "../components/ProjectCard.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import TechnologyTag from "../components/TechnologyTag.astro";
 import Icon from "../components/Icon.astro";
-import { focusAreas, nowItems, projects, skillGroups } from "../data/portfolio";
+import { copy, experiences, focusAreas, nowItems, projects, skillGroups } from "../data/portfolio";
 const navItems = [
   ["home", "Home", "user"],
   ["experience", "Experience", "briefcase"],
@@ -48,7 +48,7 @@ const resumeUrl = "/Data_Engineer_Vu_Manh_Hung_CV.pdf";
           <p class="eyebrow">Data Engineer / Hanoi, Vietnam / Solris</p>
           <h1>Vu Manh Hung</h1>
           <h2>Data Engineer</h2>
-          <p class="hero-intro">I build data pipelines, analytics-ready models, and technical notes around the systems I am learning, shipping, and improving over time.</p>
+          <p class="hero-intro">{copy.heroIntro}</p>
           <div class="button-row">
             <ButtonLink href="#projects">Selected Work <Icon name="arrow" /></ButtonLink>
             <ButtonLink href="#contact" variant="secondary">Contact</ButtonLink>
@@ -84,17 +84,14 @@ const resumeUrl = "/Data_Engineer_Vu_Manh_Hung_CV.pdf";
       <section class="section alt" id="experience">
         <div class="shell">
           <SectionHeading number="01" title="Background" eyebrow="Experience"
-            summary="A practical mix of client work, internal analytics projects, personal systems, and research-style data processing." />
+            summary="Production analytics, client reporting, and internal data workflows." />
           <div class="timeline">
-            <ExperienceItem title="Project-based Data Engineer" context="L'INNO · Remote / Part-time" date="Mar 2025 – Present"
-              body="Worked on API ingestion, cloud storage, warehouse loading, reporting data models, dashboard preparation, failed-load investigation, and backfill workflows across client and internal project contexts.">
-              <div class="tags">{["Python", "REST API", "GCS", "BigQuery", "GitHub Actions"].map((tag) => <TechnologyTag label={tag} />)}</div>
-            </ExperienceItem>
-            <ExperienceItem title="Data Engineer" context="Savvycom · Full-time" date="Sep 2025 – Apr 2026" body={projects[1].decisions}>
-              <div class="tags">{projects[1].tags.map((tag) => <TechnologyTag label={tag} />)}</div>
-            </ExperienceItem>
-            <ExperienceItem title="Data Platform Path" context="Direction"
-              body="Currently focused on becoming stronger at reliable pipeline design, data modeling, orchestration, observability, and writing technical documentation that makes systems easier to understand." />
+            {experiences.map((experience) => (
+              <ExperienceItem title={experience.title} context={experience.context} date={experience.date} body={experience.body}>
+                <p class="timeline-copy">{experience.ownership}</p>
+                <div class="tags">{experience.tags.map((tag) => <TechnologyTag label={tag} />)}</div>
+              </ExperienceItem>
+            ))}
           </div>
         </div>
       </section>
@@ -102,7 +99,7 @@ const resumeUrl = "/Data_Engineer_Vu_Manh_Hung_CV.pdf";
       <section class="section" id="projects">
         <div class="shell" id="work">
           <SectionHeading number="02" title="Selected Work" eyebrow="Projects"
-            summary="A collection of real work, internal projects, research, and personal builds. The writeups stay public-safe and avoid private data, credentials, internal URLs, or unverified metrics." />
+            summary="Production systems, client reporting, internal pipelines, and personal and research projects — context, ownership, engineering decisions, and reliability." />
           <div class="project-grid">
             {projects.map((project, index) => <ProjectCard {...project} number={String(index + 1).padStart(2, "0")} featured={index === 0} id={`project-${String(index + 1).padStart(2, "0")}`} />)}
           </div>
@@ -113,12 +110,11 @@ const resumeUrl = "/Data_Engineer_Vu_Manh_Hung_CV.pdf";
         <div class="shell about-grid">
           <div>
             <SectionHeading number="03" title="About" eyebrow="Introduction"
-              summary="This site is my personal technical home: a place to show who I am, what I am working on, and how I think about data engineering work." />
+              summary={copy.aboutIntro} />
             <div class="focus-list">{focusAreas.map((area) => <article><h3>{area.title}</h3><p>{area.description}</p></article>)}</div>
             <ButtonLink href="#projects" variant="secondary">Selected Work <Icon name="arrow" /></ButtonLink>
             <div class="now-list" id="now">
               <h3>Now / What I'm Doing</h3>
-              <p>The current thread through my work is simple: build reliable data workflows, understand the tradeoffs, and document the parts that would matter to another engineer.</p>
               {nowItems.map((item) => <article><h3>{item.title}</h3><p>{item.description}</p></article>)}
             </div>
           </div>
@@ -148,7 +144,7 @@ const resumeUrl = "/Data_Engineer_Vu_Manh_Hung_CV.pdf";
 
       <section class="section resume" id="resume">
         <div class="shell resume-inner">
-          <div><p class="eyebrow">05 / Resume</p><h2>Data Engineer CV</h2><p>A concise overview of experience, skills, and selected work.</p></div>
+          <div><p class="eyebrow">05 / Resume</p><h2>Data Engineer CV</h2><p>{copy.resumeIntro}</p></div>
           <div class="resume-actions">
             <a class="button light" href={resumeUrl} download><Icon name="download" /> Download CV</a>
             <a class="button outline-light" href={resumeUrl} target="_blank" rel="noreferrer">Open CV <Icon name="external" size={16} /></a>

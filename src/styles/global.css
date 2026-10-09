@@ -1103,6 +1103,7 @@ section[id], article[id], #now, #work { scroll-margin-top: 90px; }
 .project-details h4 { color: var(--muted); font-size: 12px; font-weight: 600; margin: 0 0 8px; }
 .project-details p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0 0 22px; }
 .project-featured .project-details { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.project-featured .project-details section:last-child { grid-column: 1 / -1; }
 .project-card .tags { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 4px; }
 .tags span { background: var(--surface); padding: 4px 8px; font-size: 11px; font-weight: 400; }
 .job-head p { color: var(--muted); font-weight: 500; }

@@ -1,12 +1,13 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
 import Icon from "./Icon.astro";
+import { copy } from "../data/portfolio";
 ---
 <section class="section alt" id="contact">
   <div class="shell contact-grid">
     <div>
       <SectionHeading number="06" title="Find me around the web." eyebrow="Contact"
-        summary="Based in Hanoi, Vietnam. I use this site as a home base for my data engineering work, project notes, links, and professional profile." />
+        summary={copy.contactIntro} />
       <div class="contact-links">
         <a href="mailto:vumanhhung1213@gmail.com"><Icon name="mail" /> vumanhhung1213@gmail.com</a>
         <a href="https://github.com/mhungsolris" target="_blank" rel="noreferrer"><Icon name="github" /> GitHub</a>

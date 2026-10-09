@@ -1,17 +1,18 @@
 ---
 import TechnologyTag from "./TechnologyTag.astro";
-interface Props { title: string; status: string; problem: string; decisions: string; reliability: string; tags: string[]; number?: string; featured?: boolean; id?: string; }
-const { title, status, problem, decisions, reliability, tags, number = "01", featured = false, id } = Astro.props;
+interface Props { title: string; status: string; role: string; type: string; problem: string; ownership: string; decisions: string; reliability: string; tags: string[]; number?: string; featured?: boolean; id?: string; }
+const { title, status, role, type, problem, ownership, decisions, reliability, tags, number = "01", featured = false, id } = Astro.props;
 ---
 <article class:list={["project-card", { "project-featured": featured }]} id={id}>
-  <span class="project-number">{number} / {featured ? "FEATURED PROJECT" : "PROJECT"}</span>
+  <span class="project-number">{number} / {type}{featured && " · FEATURED"}</span>
   <div class="project-head">
-    <div><h3>{title}</h3><p>{status}</p></div>
+    <div><h3>{title}</h3><p>{status}<br />Role: {role}</p></div>
   </div>
   <h4 class="sr-only">Problem</h4>
   <p class="project-summary">{problem}</p>
   <div class="project-details">
-    <section><h4>Decisions</h4><p>{decisions}</p></section>
+    <section><h4>Ownership</h4><p>{ownership}</p></section>
+    <section><h4>Engineering Decisions</h4><p>{decisions}</p></section>
     <section><h4>Reliability</h4><p>{reliability}</p></section>
   </div>
   <div class="tags">{tags.map((tag) => <TechnologyTag label={tag} />)}</div>
