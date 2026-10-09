@@ -3,6 +3,7 @@ node_modules
 .agents
 .astro
 dist
+.vercel
 dev-server*.log
 .env
 .env.*

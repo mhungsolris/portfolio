@@ -198,14 +198,39 @@ const resumeUrl = "/Data_Engineer_Vu_Manh_Hung_CV.pdf";
     if (event.target instanceof Node && !menu?.contains(event.target) && !menuToggle?.contains(event.target)) setMenu(false);
   });
   matchMedia("(min-width: 1041px)").addEventListener("change", (event) => { if (event.matches) setMenu(false); });
-  document.querySelector<HTMLFormElement>("#contact-form")?.addEventListener("submit", (event) => {
+  document.querySelector<HTMLFormElement>("#contact-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
     const data = new FormData(form);
-    const subject = encodeURIComponent("Portfolio enquiry from " + String(data.get("name") ?? ""));
-    const body = encodeURIComponent(String(data.get("message") ?? "") + "\n\nFrom: " + String(data.get("name") ?? "") + "\nEmail: " + String(data.get("email") ?? ""));
     const status = document.querySelector<HTMLElement>("#contact-status");
-    if (status) { status.hidden = false; status.textContent = "Email draft requested. If your email app did not open, use the email link beside this form."; }
-    window.location.href = "mailto:vumanhhung1213@gmail.com?subject=" + subject + "&body=" + body;
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    const label = document.querySelector<HTMLElement>("#contact-submit-label");
+    if (!status || !button || !label || button.disabled) return;
+    button.disabled = true;
+    form.setAttribute("aria-busy", "true");
+    label.textContent = "Sending…";
+    status.hidden = false;
+    status.textContent = "Sending your message…";
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(data)),
+        signal: AbortSignal.timeout(15000),
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        throw new Error(typeof result.message === "string" ? result.message : "Could not confirm delivery. Please use the email link.");
+      }
+      status.textContent = "Message sent. Thanks for reaching out — I'll reply by email.";
+      form.reset();
+    } catch (error) {
+      status.textContent = error instanceof Error && error.name === "Error"
+        ? error.message : "Could not confirm delivery. Please use the email link beside this form.";
+    } finally {
+      button.disabled = false;
+      form.removeAttribute("aria-busy");
+      label.textContent = "Send message";
+    }
   });
 </script>
