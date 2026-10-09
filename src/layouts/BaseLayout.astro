@@ -16,6 +16,11 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <script is:inline>
+      try {
+        document.documentElement.classList.toggle("light", localStorage.getItem("portfolio-theme") === "light");
+      } catch {}
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip To Content</a>

@@ -1,18 +1,11 @@
 ---
-interface Props {
-  title: string;
-  context: string;
-  body: string;
-}
-
-const { title, context, body } = Astro.props;
+import Icon from "./Icon.astro";
+interface Props { title: string; context: string; body: string; date?: string; }
+const { title, context, body, date } = Astro.props;
 ---
-
-<article class="relative pl-6 before:absolute before:bottom-0 before:left-0 before:top-2 before:w-px before:bg-border md:pl-8">
-  <div class="absolute left-[-4px] top-2.5 h-2 w-2 rounded-full bg-foreground"></div>
-  <div class="mb-4 flex flex-col justify-between gap-2 md:flex-row md:items-baseline">
-    <h3 class="font-serif text-2xl text-foreground">{title}</h3>
-    <span class="font-mono text-sm uppercase tracking-wider text-muted">{context}</span>
-  </div>
-  <p class="font-sans text-base leading-relaxed text-foreground/80">{body}</p>
+<article>
+  <div class="timeline-marker"><Icon name="briefcase" size={18} /></div>
+  <div class="job-head"><div><h3>{title}</h3><p>{context}</p></div>{date && <div class="date">{date}</div>}</div>
+  <p class="timeline-copy">{body}</p>
+  <slot />
 </article>

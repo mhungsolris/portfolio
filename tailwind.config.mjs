@@ -4,15 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        foreground: "#f5f5f5",
-        muted: "#888888",
-        border: "#2a2a2a",
-        card: "#111111",
-        secondary: "#1a1a1a"
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        muted: "var(--muted)",
+        border: "var(--border)",
+        card: "var(--card)",
+        secondary: "var(--surface)",
+        accent: "var(--brand)"
       },
       fontFamily: {
-        serif: ["Newsreader", "ui-serif", "Georgia", "Cambria", "Times New Roman", "serif"],
+        heading: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
       }

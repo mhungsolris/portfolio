@@ -1,43 +1,18 @@
 ---
 import TechnologyTag from "./TechnologyTag.astro";
-
-interface Props {
-  title: string;
-  status: string;
-  problem: string;
-  decisions: string;
-  reliability: string;
-  tags: string[];
-}
-
-const { title, status, problem, decisions, reliability, tags } = Astro.props;
+interface Props { title: string; status: string; problem: string; decisions: string; reliability: string; tags: string[]; number?: string; featured?: boolean; id?: string; }
+const { title, status, problem, decisions, reliability, tags, number = "01", featured = false, id } = Astro.props;
 ---
-
-<article class="group border border-border bg-card transition-colors hover:border-foreground/30">
-  <div class="flex flex-col gap-3 border-b border-border bg-secondary/30 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-8">
-    <h3 class="min-w-0 font-serif text-2xl leading-tight text-foreground md:text-3xl">{title}</h3>
-    <span class="inline-flex shrink-0 items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted md:justify-end">
-      <span class="block h-1.5 w-1.5 rounded-full bg-foreground"></span>
-      {status}
-    </span>
+<article class:list={["project-card", { "project-featured": featured }]} id={id}>
+  <span class="project-number">{number} / {featured ? "FEATURED PROJECT" : "PROJECT"}</span>
+  <div class="project-head">
+    <div><h3>{title}</h3><p>{status}</p></div>
   </div>
-
-  <div class="grid divide-y divide-border/70 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
-    <section class="p-6 md:p-8">
-      <h4 class="mb-5 font-mono text-xs uppercase tracking-widest text-muted">Problem</h4>
-      <p class="font-serif text-xl leading-relaxed text-foreground/90">{problem}</p>
-    </section>
-    <section class="p-6 md:p-8">
-      <h4 class="mb-5 font-mono text-xs uppercase tracking-widest text-muted">Decisions</h4>
-      <p class="font-sans text-base leading-relaxed text-foreground/80">{decisions}</p>
-    </section>
-    <section class="p-6 md:p-8">
-      <h4 class="mb-5 font-mono text-xs uppercase tracking-widest text-muted">Reliability</h4>
-      <p class="font-sans text-base leading-relaxed text-foreground/80">{reliability}</p>
-    </section>
+  <h4 class="sr-only">Problem</h4>
+  <p class="project-summary">{problem}</p>
+  <div class="project-details">
+    <section><h4>Decisions</h4><p>{decisions}</p></section>
+    <section><h4>Reliability</h4><p>{reliability}</p></section>
   </div>
-
-  <div class="flex flex-wrap gap-2 border-t border-border bg-secondary/30 px-6 py-4 md:px-8">
-      {tags.map((tag) => <TechnologyTag label={tag} />)}
-  </div>
+  <div class="tags">{tags.map((tag) => <TechnologyTag label={tag} />)}</div>
 </article>

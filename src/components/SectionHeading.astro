@@ -1,24 +1,9 @@
 ---
-interface Props {
-  number: string;
-  title: string;
-  summary?: string;
-}
-
-const { number, title, summary } = Astro.props;
+interface Props { number: string; title: string; summary?: string; eyebrow?: string; }
+const { number, title, summary, eyebrow = title } = Astro.props;
 ---
-
-<header class="relative mb-12 min-h-[13rem] border-t border-border pt-8 md:mb-16 md:min-h-[17rem] md:pt-10">
-  <div class="pointer-events-none absolute -left-1 top-5 select-none md:-left-2 md:top-7" aria-hidden="true">
-    <span class="font-mono text-[8.5rem] font-bold leading-none tracking-[-0.09em] text-foreground/[0.055] md:text-[13rem]">
-      {number}
-    </span>
-  </div>
-
-  <div class="relative max-w-4xl pt-20 md:pt-28">
-    <h2 class="max-w-4xl text-balance font-serif text-5xl leading-[0.92] tracking-tight text-foreground md:ml-40 md:text-7xl lg:ml-56">
-      {title}
-    </h2>
-    {summary && <p class="mt-7 max-w-3xl font-sans text-lg leading-relaxed text-foreground/70 md:text-xl">{summary}</p>}
-  </div>
-</header>
+<div class="section-heading">
+  <p class="eyebrow">{number} / {eyebrow}</p>
+  <h2>{title}</h2>
+  {summary && <p>{summary}</p>}
+</div>
