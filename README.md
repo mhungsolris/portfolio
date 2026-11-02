@@ -11,6 +11,8 @@ Open the local URL printed by Astro (usually http://localhost:4321).
 
 ## Content and CV sources
 
+The CV is private as of 2026-11-02. The site retains Contact, with no Resume section or CV links. Do not publish the PDF in `public/` or restore automatic synchronization. The older synchronization instructions below are superseded.
+
 Source paths are recorded in `portfolio.sources.json`:
 
 - Approved content brief: `W:\Profile\doc_preview\PORTFOLIO_CONTENT_UPDATE.md`.

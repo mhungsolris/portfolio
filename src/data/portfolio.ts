@@ -4,7 +4,6 @@
 export const copy = {
   "heroIntro": "I build and operate production data pipelines, analytics platforms, and reporting systems — from requirement clarification and multi-source ingestion to modeling, validation, monitoring, and backfills.",
   "aboutIntro": "This site is my technical home — a place to document the production systems I have worked on, the projects I have built, and how I approach Data Engineering problems from requirements to reliable delivery.",
-  "resumeIntro": "A concise overview of my professional experience, production Data Engineering work, skills, and selected projects.",
   "contactIntro": "Based in Hanoi, Vietnam. Open to Data Engineer opportunities, especially remote roles and teams working on production data platforms, analytics infrastructure, or data-intensive products."
 };
 
